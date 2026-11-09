@@ -1,0 +1,44 @@
+{% extends 'admin_dashboard/admin_layout.html' %}
+{% block content %}
+
+<section class="section dashboard">
+  <div class="row">
+    <!-- <div class="col-md-6"> -->
+        <!-- <div class="container mt-4"> -->
+        <div class="content mt-3">    
+          
+        
+            <div class="card">
+                <div class="card-header">
+                   Enquiry List
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Full Name</th>
+                                <th class="text-center">Address</th>
+                                <th class="text-center">Phone Number</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for enquiry in enquiries %}
+                                <tr>
+                                    <td>{{ enquiry.full_name }}</td>
+                                    <td>{{ enquiry.address }}</td>
+                                    <td>{{ enquiry.phone_no }}</td>
+                                    <td>{{ enquiry.email }}</td>
+                                    <td>{{ enquiry.message }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'admin_dashboard/admin_layout.html' %}
+{% block content %}
+
+<section class="section dashboard">
+  <div class="row">
+    <!-- <div class="col-md-6"> -->
+        <!-- <div class="container mt-4"> -->
+        <div class="content mt-3">    
+          
+        
+            <div class="card">
+                <div class="card-header">
+                   Pending Responses
+                </div>
+                <div>
+                    <form action="{% url 'pending_response' %}" method="POST">
+                        {% csrf_token %}
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    
+                        <label for="endDate">End Date:</label>
+                        <input type="date" id="endDate" name="endDate" required>
+                        <button type="submit">Search</button>
+                      </form>
+                </div>
+                <div class="card-body">
+                    
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Question</th>
+                                <th class="text-center">Date</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for res in responses %}
+                                <tr>
+                                    <td>{{ res.response }}</td>
+                                    <td>{{ res.date }}</td>    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
