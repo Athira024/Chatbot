@@ -1,0 +1,64 @@
+{% extends 'home/home_layout.html' %}
+{% block content %}
+{% load static %}
+       
+    <div class="container">
+        <div class="chat-container">
+            <!-- Chat messages -->
+            <div class="full_chat">    
+            </div>
+            <!-- Input form -->
+            <form id="chat-form" action="{% url 'chat' %}" method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    <textarea id="message" name="message" rows="4" cols="50" placeholder="Type your message..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary">Send</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+$(document).ready(function(){
+    // Submit form function
+    $("#chat-form").submit(function(event) {
+        event.preventDefault();
+        // Serialize form data
+        var formData = $(this).serialize();
+        chat_text="";
+        $.ajax({
+            url: "{% url 'send_chat' %}",
+            method: "POST",
+            data: formData, // Pass serialized form data
+            dataType: "json",
+            success: function(response) {
+                console.log(response)
+                // Iterate over each object in the JSON array
+                    $.each(response, function(index, message_obj) {
+                        // Access properties of each object
+                       var isUser=message_obj.postedby=="Bot"  ? false:true;
+                       chat_text+= displayMessage(message_obj.response, isUser)
+                    });
+
+                    $(".full_chat").html(chat_text);
+                                    // Handle successful request
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                alert(status)
+            }
+        });
+    });
+    // Function to display messages
+    function displayMessage(message, isUser) {
+            var messageClass = isUser ? "user-message" : "bot-message";
+            var user = isUser ? "You" : "Bot";
+            var messageBubble = '<div class="message-bubble ' + messageClass + '">' +user +" : "+ message + '</div>';
+            return messageBubble
+        }
+});       
+    </script>
+    {% endblock %}

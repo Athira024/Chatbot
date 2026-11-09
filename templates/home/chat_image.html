@@ -1,0 +1,19 @@
+{% extends 'home/home_layout.html' %}
+{% block content %}
+{% load static %}
+       
+    <div class="container">
+        <div class="chat-container">
+            <!-- Chat messages -->
+            <div class="full_chat">
+            
+                <img src="{% static 'home/images/robot.webp'%}"/>
+                <a href="{% url 'chat' %}" class="buy">Continue</a>
+                
+            </div>
+          
+           
+        </div>
+    </div>
+   
+{% endblock %}
