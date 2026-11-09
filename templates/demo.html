@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <style type=""text/css">
+        form{
+            border: #c72626 solid 1px;
+            background-color: aqua;
+        }
+        </style>
+    </head>
+    <body>
+        <form method="post" action="{% url 'save_student' %}">
+            {% csrf_token %}
+            <div>
+                <label>First Name:</label>
+                <input type="text" name="first">
+            </div>
+            <div>
+                <label>Last Name:</label>
+                <input type="text" name="lname">
+            </div>
+            <div>
+                <label>Age:</label>
+                <input type="text" name="age">
+            </div>
+            <div>
+                <input type="submit" value"Submit">
+            </div>
+        </form>
+    </body>
+</html>

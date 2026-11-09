@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <table border="1">
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Age</th>
+            <th>Actions</th>
+            {% for s in Students %}
+            <tr>
+                <td>{{s.first_name}}</td>
+                <td>{{s.last_name}}</td>
+                <td>{{s.age}}</td>
+                <td>
+                    <a href="{% url 'edit_stud' s.stud_id %}" class="btn btn-success">Edit</a>
+                    <a href="{% url 'delete_stud' s.stud_id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

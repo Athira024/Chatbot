@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <style type=""text/css">
+        form{
+            border: #c72626 solid 1px;
+            background-color: aqua;
+        }
+        </style>
+    </head>
+    <body>
+        <form method="post" action="{% url 'update_stud' %}">
+            {% csrf_token %}
+            <div>
+                <label>First Name:</label>
+                <input type="text" name="first" value="{{st_list.first_name}}">
+            </div>
+            <div>
+                <label>Last Name:</label>
+                <input type="text" name="lname" value="{{st_list.last_name}}">
+            </div>
+            <div>
+                <label>Age:</label>
+                <input type="text" name="age" value="{{st_list.age}}">
+            </div>
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+            <div>
+                <input type="hidden" name="sid" value="{{st_list.stud_id}}">
+            </div>
+        </form>
+    </body>
+</html>
